@@ -6,6 +6,9 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.tesoramobil.cooperacion.dtos.Aportacion;
 
 @Entity
 @Table(name = "tesora_cooperations")
@@ -66,5 +69,8 @@ public class CooperationEntity {
 
     @Column(name = "monto_por_participante", nullable = false)
     private BigDecimal  montoPorParticipante;
+
+    @Transient
+    private List<Aportacion> aportaciones;
 
 }

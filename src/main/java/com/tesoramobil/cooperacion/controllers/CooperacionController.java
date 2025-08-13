@@ -1,5 +1,6 @@
 package com.tesoramobil.cooperacion.controllers;
 
+import com.tesoramobil.cooperacion.dtos.CooperationConAportacionesDTO;
 import com.tesoramobil.cooperacion.entities.CooperationEntity;
 import com.tesoramobil.cooperacion.models.ApiResponse;
 import com.tesoramobil.cooperacion.services.CooperationService;
@@ -29,6 +30,19 @@ public class CooperacionController {
         List<CooperationEntity> list = cooperationService.findAll();
         return ResponseEntity.ok(new ApiResponse<>("OK", "Cooperaciones encontradas", list));
     }
+
+@Operation(summary = "Obtener una cooperación con sus aportaciones")
+@ApiResponses({
+     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cooperación encontrada con aportaciones"),
+     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Cooperación no encontrada")
+})
+@GetMapping("/{id}/detalle")
+public ResponseEntity<ApiResponse<CooperationConAportacionesDTO>> findDetalleById(@PathVariable Long id) {
+    return cooperationService.findDetalleById(id)
+            .map(detalle -> ResponseEntity.ok(new ApiResponse<>("OK", "Cooperación con aportaciones", detalle)))
+            .orElse(ResponseEntity.status(404)
+                    .body(new ApiResponse<>("NOT_FOUND", "Cooperación no encontrada", null)));
+}
 
 
     @Operation(summary = "Obtener una cooperación por su ID")

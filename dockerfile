@@ -23,8 +23,8 @@ WORKDIR /app
 COPY target/cooperacion-service.jar app.jar
 
 # Expone puertos (puedes eliminar 8080 si usas solo 443)
-EXPOSE 8086
-EXPOSE 8086
+EXPOSE 8087
+EXPOSE 8087
 
 # Ejecuta la app
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
