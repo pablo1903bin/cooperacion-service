@@ -46,6 +46,7 @@ public class CooperationServiceImpl implements CooperationService {
         if (coopOpt.isPresent()) {
             CooperationEntity cooperation = coopOpt.get();
             List<Aportacion> aportaciones = aportacionClient.obtenerPorCooperacion(id).getData();
+            System.out.println("🔐 Respuesta del servicio de aportaciones: " + aportaciones);
             cooperation.setAportaciones(aportaciones);
             return Optional.of(cooperation);
         }
