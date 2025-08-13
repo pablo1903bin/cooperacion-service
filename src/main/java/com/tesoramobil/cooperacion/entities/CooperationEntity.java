@@ -2,6 +2,8 @@ package com.tesoramobil.cooperacion.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -61,4 +63,8 @@ public class CooperationEntity {
 
     @Column(name = "update_by", nullable = false)
     private Long updateBy;
+
+    @Column(name = "monto_por_participante", nullable = false)
+    private BigDecimal  montoPorParticipante;
+
 }
