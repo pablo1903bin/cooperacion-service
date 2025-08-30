@@ -1,5 +1,5 @@
 
-package com.tesoramobil.cooperacion.beans;
+package com.tesoramobil.cooperacion.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
