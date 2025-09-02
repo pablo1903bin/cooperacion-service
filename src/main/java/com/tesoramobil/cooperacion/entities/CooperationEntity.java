@@ -23,7 +23,7 @@ public class CooperationEntity {
     private Long id;
 
     @Column(name = "categoria_id", nullable = false)
-    private Integer categoriaId;
+    private Long categoriaId;
 
     @Column(name = "created_by", nullable = false)
     private Long createdBy;
@@ -44,16 +44,16 @@ public class CooperationEntity {
     private LocalDate fechaFin;
 
     @Column(name = "group_id", nullable = false)
-    private Integer groupId;
+    private Long groupId;
 
-    @Column(name = "monto_actual")
-    private Double montoActual;
+    @Column(name = "monto_actual", precision = 19, scale = 2) 
+    private BigDecimal montoActual;
 
     @Column(name = "monto_objetivo", nullable = false)
-    private Double montoObjetivo;
+    private BigDecimal montoObjetivo;
 
     @Column(name = "monto_restante")
-    private Double montoRestante;
+    private BigDecimal montoRestante;
 
     @Column(name = "no_cuenta_pago", length = 255)
     private String noCuentaPago;

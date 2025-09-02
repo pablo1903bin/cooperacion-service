@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "aportacion-service", path = "/aportacion-service/aportaciones")
+@FeignClient(name = "aportacion-service", path = "/aportacion-service/aportaciones",   fallbackFactory = AportacionClientFallbackFactory.class)
 //@FeignClient(name = "users-service", path = "/users-service/users")
 public interface AportacionClient {
 

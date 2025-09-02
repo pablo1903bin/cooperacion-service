@@ -1,5 +1,6 @@
 package com.tesoramobil.cooperacion.controllers;
 
+import com.tesoramobil.cooperacion.dtos.CooperacionResumeDto;
 import com.tesoramobil.cooperacion.dtos.CooperationConAportacionesDTO;
 import com.tesoramobil.cooperacion.entities.CooperationEntity;
 import com.tesoramobil.cooperacion.models.ApiResponse;
@@ -21,13 +22,13 @@ public class CooperacionController {
     @Autowired
     CooperationService cooperationService;
 
-    @Operation(summary = "Obtener todas las cooperaciones")
+    @Operation(summary = "Obtener todas las cooperaciones resumidas")
     @ApiResponses({
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Lista de cooperaciones obtenida exitosamente")
     })
-    @GetMapping("/getAll")
-    public ResponseEntity<ApiResponse<List<CooperationEntity>>> findAll() {
-        List<CooperationEntity> list = cooperationService.findAll();
+    @GetMapping("/getAll/resume")
+    public ResponseEntity<ApiResponse<List<CooperacionResumeDto>>> findAll() {
+        List<CooperacionResumeDto> list = cooperationService.findAll();
         return ResponseEntity.ok(new ApiResponse<>("OK", "Cooperaciones encontradas", list));
     }
 

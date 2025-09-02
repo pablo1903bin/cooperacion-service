@@ -8,21 +8,21 @@ spring:
     name: cooperacion-service 
 
   profiles:
-    default: local 
+    default: dev 
 
   config:
-    #import: ${config-server.import} # Importa la configuración externa desde config-server
-    import: optional:configserver:http://localhost:7777/
-    #import: optional:configserver:http://192.168.100.48:7777/
+    #import: ${SPRING_CONFIG_IMPORT} # Importa la configuración externa desde config-server
+    #import: optional:configserver:http://localhost:7777/
+    import: optional:configserver:http://192.168.100.48:7777/
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: dev
+    username: ${db.username} 
     hikari:
       maximum-pool-size: 5 
       connection-timeout: 20000 
-    url: jdbc:postgresql://177.227.251.18:5433/tesora_dev
-    password: supernovapablito797
+    url: ${db.url} 
+    password: ${db.password} 
 
 
   jpa:
@@ -41,7 +41,7 @@ spring:
           environment:
             spring:
               kafka:
-                bootstrap-servers: kafka-v2:29092  # Dirección IP y puerto del broker Kafka
+                bootstrap-servers: 192.168.100.48:9092  # Dirección IP y puerto del broker Kafka
 
       # 🧭 Definición de los canales lógicos de entrada y salida
       bindings:
@@ -88,15 +88,6 @@ spring:
           #content-type: application/json  # Tipo de datos esperados
        # Usa también el binder de Kafka
 
-  feign:
-    client:
-      config:
-        aportacion-service:
-          connectTimeout: 1500
-          readTimeout: 2000
-          # Puedes activar un retryer simple si quieres:
-          # retryer: feign.Retryer$Default
-
 
 logging:
   level:
@@ -117,9 +108,9 @@ eureka:
     instance-id: "${spring.application.name}:${random.value}" # ID único para registrar esta instancia en Eureka (evita duplicados)
   client:
     service-url:   
-      #defaultZone: http://192.168.100.48:8761/eureka/
+      defaultZone: http://192.168.100.48:8761/eureka/
       #defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
-      defaultZone: "${eureka.registry-server}"
+      #defaultZone: "${eureka.registry-server}"
 
 springdoc:
   swagger-ui:
