@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 @Builder
 public class CooperacionConAportacionesDTO {
+	
  private Long id;
  private String nombre;
  private String descripcion;
@@ -27,4 +28,5 @@ public class CooperacionConAportacionesDTO {
  private BigDecimal montoRestante;
  private BigDecimal montoPorParticipante;
  private List<Aportacion> aportaciones;
+ 
 }

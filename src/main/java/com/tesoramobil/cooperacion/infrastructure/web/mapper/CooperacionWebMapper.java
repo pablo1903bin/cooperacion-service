@@ -1,11 +1,14 @@
 package com.tesoramobil.cooperacion.infrastructure.web.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import com.tesoramobil.cooperacion.domain.model.Cooperacion;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResponse;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResumenResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CrearCooperacionRequest;
 
 
@@ -24,4 +27,12 @@ public interface CooperacionWebMapper {
 
     // dominio -> response (si los nombres coinciden, se mapea solo)
     CooperacionResponse toResponse(Cooperacion domain);
+    
+    
+    CooperacionResumenResponse toResumen(Cooperacion domain);
+    
+    
+    List<CooperacionResumenResponse> toResumenList(List<Cooperacion> list);
+    
+    
 }
