@@ -1,10 +1,11 @@
 package com.tesoramobil.cooperacion.dtos;
 
-import com.tesoramobil.cooperacion.entities.CooperationEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+
+import com.tesoramobil.cooperacion.infrastructure.persistence.jpa.entity.CooperationEntity;
 
 @Data
 @AllArgsConstructor

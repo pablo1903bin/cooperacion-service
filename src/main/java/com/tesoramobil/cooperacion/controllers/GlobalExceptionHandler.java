@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.tesoramobil.cooperacion.exceptions.CustomDatabaseException;
 import com.tesoramobil.cooperacion.exceptions.KafkaPublicacionException;
 import com.tesoramobil.cooperacion.exceptions.TokenNotFoundException;
-import com.tesoramobil.cooperacion.models.ApiResponse;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.ApiResponse;
 
 import jakarta.persistence.EntityNotFoundException;
 

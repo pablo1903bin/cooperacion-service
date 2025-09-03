@@ -1,22 +1,12 @@
 package com.tesoramobil.cooperacion.controllers;
 
-import com.tesoramobil.cooperacion.dtos.CooperacionResumeDto;
-import com.tesoramobil.cooperacion.dtos.CooperationConAportacionesDTO;
-import com.tesoramobil.cooperacion.entities.CooperationEntity;
-import com.tesoramobil.cooperacion.models.ApiResponse;
-import com.tesoramobil.cooperacion.services.CooperationService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+public class CooperacionController {
+	
+}
 
-@RestController
-@RequestMapping("/cooperations")
-@Tag(name = "Cooperaciones", description = "Operaciones relacionadas con cooperaciones escolares o comunitarias")
+/*
+
 public class CooperacionController {
 
     @Autowired
@@ -124,3 +114,4 @@ public ResponseEntity<ApiResponse<CooperationConAportacionesDTO>> findDetalleByI
         return ResponseEntity.ok(new ApiResponse<>("OK", "Cooperaciones activas encontradas", list));
     }
 }
+*/
