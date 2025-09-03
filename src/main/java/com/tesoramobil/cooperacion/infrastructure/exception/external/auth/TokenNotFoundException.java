@@ -1,4 +1,4 @@
-package com.tesoramobil.cooperacion.exceptions;
+package com.tesoramobil.cooperacion.infrastructure.exception.external.auth;
 
 /**
  * Excepción personalizada lanzada cuando no se encuentra un token solicitado.

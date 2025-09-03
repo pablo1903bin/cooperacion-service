@@ -1,4 +1,4 @@
-package com.tesoramobil.cooperacion.exceptions;
+package com.tesoramobil.cooperacion.infrastructure.exception.persistence;
 
 /**
  * Excepción personalizada para errores relacionados con operaciones de base de datos.

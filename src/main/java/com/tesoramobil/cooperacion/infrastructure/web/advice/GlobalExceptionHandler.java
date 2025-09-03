@@ -1,23 +1,25 @@
-package com.tesoramobil.cooperacion.controllers;
+package com.tesoramobil.cooperacion.infrastructure.web.advice;
 import org.apache.kafka.common.KafkaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.tesoramobil.cooperacion.exceptions.CustomDatabaseException;
-import com.tesoramobil.cooperacion.exceptions.KafkaPublicacionException;
-import com.tesoramobil.cooperacion.exceptions.TokenNotFoundException;
+import com.tesoramobil.cooperacion.infrastructure.exception.external.auth.TokenNotFoundException;
+import com.tesoramobil.cooperacion.infrastructure.exception.external.kafka.KafkaPublicacionException;
+import com.tesoramobil.cooperacion.infrastructure.exception.persistence.CustomDatabaseException;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.ApiResponse;
 
 import jakarta.persistence.EntityNotFoundException;
 
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Controlador global para manejar excepciones de manera centralizada en la aplicación.
@@ -28,28 +30,29 @@ import java.util.NoSuchElementException;
 public class GlobalExceptionHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
+	
     /**
      * Maneja errores de validación en los DTOs.
      *
      * @param ex Excepción de validación de argumentos.
      * @return Respuesta con código de estado 400 (Bad Request) y detalles del error.
      */
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        // Obtiene el primer error de validación.
-        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .findFirst()
-                .orElse("Error de validación");
+    public ResponseEntity<ApiResponse<Map<String, String>>> handleBodyValidation(MethodArgumentNotValidException ex) {
+    	
+        Map<String, String> errors = ex.getBindingResult().getFieldErrors().stream()
+            .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (a,b)->a));
 
-        // Registra el error en los logs.
-        ex.printStackTrace();
-
-        // Construye una respuesta con el código 400 y el mensaje de error.
-        ApiResponse<String> response = new ApiResponse<>("ERROR", errorMessage, null);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(
+            ApiResponse.<Map<String,String>>builder()
+                .codigo("VALIDATION_ERROR")
+                .mensaje("Petición inválida")
+                .data(errors)
+                .build()
+        );
     }
+    
 
     /**
      * Maneja errores cuando una entidad no es encontrada.

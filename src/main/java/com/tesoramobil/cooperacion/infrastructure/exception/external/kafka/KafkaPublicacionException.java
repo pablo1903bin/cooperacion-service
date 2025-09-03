@@ -1,4 +1,4 @@
-package com.tesoramobil.cooperacion.exceptions;
+package com.tesoramobil.cooperacion.infrastructure.exception.external.kafka;
 
 /**
  * Excepción personalizada para errores ocurridos al intentar publicar mensajes en Kafka.
