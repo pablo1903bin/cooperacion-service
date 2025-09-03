@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
-import com.tesoramobil.cooperacion.dtos.Aportacion;
+import com.tesoramobil.cooperacion.domain.model.Aportacion;
 import com.tesoramobil.cooperacion.infrastructure.external.aportacion.client.AportacionFeignClient;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.ApiResponse;
 

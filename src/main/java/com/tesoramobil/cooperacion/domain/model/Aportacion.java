@@ -1,4 +1,4 @@
-package com.tesoramobil.cooperacion.dtos;
+package com.tesoramobil.cooperacion.domain.model;
 
 import lombok.Builder;
 import lombok.Data;

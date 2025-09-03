@@ -2,7 +2,7 @@ package com.tesoramobil.cooperacion.application.port.out;
 
 import java.util.List;
 
-import com.tesoramobil.cooperacion.dtos.Aportacion;
+import com.tesoramobil.cooperacion.domain.model.Aportacion;
 
 public interface AportacionQueryPort {
 	

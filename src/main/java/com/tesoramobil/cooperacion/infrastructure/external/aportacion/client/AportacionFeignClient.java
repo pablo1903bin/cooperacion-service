@@ -1,6 +1,6 @@
 package com.tesoramobil.cooperacion.infrastructure.external.aportacion.client;
 
-import com.tesoramobil.cooperacion.dtos.Aportacion;
+import com.tesoramobil.cooperacion.domain.model.Aportacion;
 import com.tesoramobil.cooperacion.infrastructure.external.aportacion.fallback.AportacionClientFallbackFactory;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.ApiResponse;
 

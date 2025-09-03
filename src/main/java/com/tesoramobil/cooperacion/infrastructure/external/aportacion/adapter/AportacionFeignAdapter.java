@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.tesoramobil.cooperacion.application.port.out.AportacionQueryPort;
-import com.tesoramobil.cooperacion.dtos.Aportacion;
+import com.tesoramobil.cooperacion.domain.model.Aportacion;
 import com.tesoramobil.cooperacion.infrastructure.external.aportacion.client.AportacionFeignClient;
 
 import lombok.RequiredArgsConstructor;

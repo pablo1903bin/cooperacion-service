@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.tesoramobil.cooperacion.dtos.Aportacion;
+import com.tesoramobil.cooperacion.domain.model.Aportacion;
 
 @Entity
 @Table(name = "tesora_cooperations")
