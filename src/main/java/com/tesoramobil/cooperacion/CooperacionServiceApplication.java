@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.tesoramobil.cooperacion.infrastructure.external")
 public class CooperacionServiceApplication {
 
 	public static void main(String[] args) {
