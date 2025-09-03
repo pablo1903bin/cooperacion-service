@@ -69,7 +69,7 @@ public class CooperacionController {
 		
 	}
 	
-	@GetMapping("/byId/{id}")
+	@GetMapping("byId/{id}")
 	@Operation(
 	    summary = "Obtener cooperación por ID",
 	    description = "Devuelve los datos resumidos de una cooperación según su identificador."
