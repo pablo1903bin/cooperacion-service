@@ -3,6 +3,7 @@ package com.tesoramobil.cooperacion.infrastructure.persistence.jpa.adapter;
 
 import com.tesoramobil.cooperacion.application.port.out.CooperacionRepositoryPort;
 import com.tesoramobil.cooperacion.domain.model.Cooperacion;
+import com.tesoramobil.cooperacion.infrastructure.persistence.jpa.entity.CooperationEntity;
 import com.tesoramobil.cooperacion.infrastructure.persistence.jpa.mapper.CooperacionMapper;
 import com.tesoramobil.cooperacion.infrastructure.persistence.jpa.repository.CooperationJpaRepository;
 
@@ -21,9 +22,26 @@ public class CooperacionJpaAdapter implements CooperacionRepositoryPort {
     private final CooperacionMapper mapper;
 
     @Override
-    public Cooperacion save(Cooperacion c) {
-        var saved = jpa.save(mapper.toEntity(c));
-        return mapper.toDomain(saved);
+    public Cooperacion save(Cooperacion cooperacion) {
+    	
+    	System.out.println("Cooperacion" + cooperacion);
+    	
+    	System.out.println("Guardando un registro de cooperacion...");
+    	
+    	CooperationEntity saved = null;
+    	
+         try {
+        	 
+        	System.out.println("MAPPER A ENTITY: " + mapper.toEntity(cooperacion));
+        	 
+           saved = jpa.save(mapper.toEntity(cooperacion));
+
+         } catch(Exception e) {
+        	 System.out.println("Exception: "+ e);
+         }
+        
+        
+		return mapper.toDomain(saved);
     }
 
     @Override

@@ -32,6 +32,8 @@ public class CooperacionController {
     public ResponseEntity<ApiResponse<CooperacionResponse>> create(@Valid @RequestBody CrearCooperacionRequest req) {
     	
     	System.out.println("Llamando al controller....");
+    	System.out.println("REQUEST: " + req );
+    	System.out.println("Mapper: " + webMapper.toDomain(req) );
     	
         var creada = crearUseCase.ejecutar(webMapper.toDomain(req));
         

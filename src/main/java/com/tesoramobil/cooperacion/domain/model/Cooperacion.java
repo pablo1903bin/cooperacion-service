@@ -70,4 +70,16 @@ public class Cooperacion {
         if (v == null || v.signum() < 0) throw new IllegalArgumentException(field + " negativo");
         return v;
     }
+
+	@Override
+	public String toString() {
+		return "Cooperacion [id=" + id + ", categoriaId=" + categoriaId + ", creadoPor=" + creadoPor + ", nombre="
+				+ nombre + ", descripcion=" + descripcion + ", estado=" + estado + ", fechaCreacion=" + fechaCreacion
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", grupoId=" + grupoId + ", montoActual="
+				+ montoActual + ", montoObjetivo=" + montoObjetivo + ", montoRestante=" + montoRestante
+				+ ", montoPorParticipante=" + montoPorParticipante + ", noCuentaPago=" + noCuentaPago
+				+ ", actualizadoEn=" + actualizadoEn + ", actualizadoPor=" + actualizadoPor + "]\n";
+	}
+    
+    
 }

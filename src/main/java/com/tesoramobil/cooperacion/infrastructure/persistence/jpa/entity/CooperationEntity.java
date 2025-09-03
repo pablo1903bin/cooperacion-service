@@ -73,4 +73,15 @@ public class CooperationEntity {
     @Transient
     private List<Aportacion> aportaciones;
 
+	@Override
+	public String toString() {
+		return "CooperationEntity [id=" + id + ", categoriaId=" + categoriaId + ", createdBy=" + createdBy
+				+ ", descripcion=" + descripcion + ", estado=" + estado + ", fechaCreacion=" + fechaCreacion
+				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", groupId=" + groupId + ", montoActual="
+				+ montoActual + ", montoObjetivo=" + montoObjetivo + ", montoRestante=" + montoRestante
+				+ ", noCuentaPago=" + noCuentaPago + ", nombre=" + nombre + ", updateAt=" + updateAt + ", updateBy="
+				+ updateBy + ", montoPorParticipante=" + montoPorParticipante + ", aportaciones=" + aportaciones + "]\n";
+	}
+    
+
 }

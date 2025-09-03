@@ -14,14 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class CrearCooperacionService implements CrearCooperacionUseCase {
 
 
-    private final CooperacionRepositoryPort repo;
+    private final CooperacionRepositoryPort repoPort;
 
     @Override
-    public Cooperacion ejecutar(Cooperacion nueva) {
+    public Cooperacion ejecutar(Cooperacion cooperacion) {
+    	
+    	System.out.println("[CrearCooperacionService] ejecutar: " + cooperacion);
     	
     	System.out.println("Ejecutando la clase de implemntacion concreta sobre el caso de uso para crear una cooperacion...");
 
-        return repo.save(nueva);
+        return repoPort.save(cooperacion);
         
     }
 
