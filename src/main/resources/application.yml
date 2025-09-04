@@ -1,66 +1,74 @@
 server:
   servlet:
-    context-path: /cooperacion-service
-  port: 8087
+    context-path: ${server.context-path}
+  port: ${server.port}
 
 spring:
   application:
-    name: cooperacion-service 
-
+    name: cooperacion-service
   profiles:
-    default: local 
-
+    active: local
   config:
     import: optional:configserver:http://192.168.1.120:9999/
 
   datasource:
     driver-class-name: org.postgresql.Driver
+    url: ${db.url}
     username: ${db.username}
+    password: ${db.password}
     hikari:
-      maximum-pool-size: 5 
-      connection-timeout: 20000 
-    url: ${db.url} 
-    password: ${db.password} 
-
+      maximum-pool-size: ${db.maximum-pool-size}
+      connection-timeout: ${db.connection-timeout}
 
   jpa:
     hibernate:
-      ddl-auto: validate   # o update/create-drop según tu caso
+      ddl-auto: validate
     properties:
       hibernate.format_sql: false
 
-
-  feign:
-    client:
-      config:
-        aportacion-service:
-          connectTimeout: 1500
-          readTimeout: 2000
-
+  cloud:
+    # Descubrimiento + Feign LoadBalancer
+    discovery:
+      enabled: true
+    openfeign:
+      loadbalancer:
+        enabled: true
+      client:
+        config:
+          aportacion-service:
+            connectTimeout: ${feign.aportacion-service.connect-timeout:5000}
+            readTimeout: ${feign.aportacion-service.read-timeout:8000}
+            # url: ${feign.aportacion-service.url:}  # (opcional) bypass temporal de Eureka
+    loadbalancer:
+      cache:
+        enabled: false
 
 logging:
   level:
-
     org:
       hibernate:
-        SQL: DEBUG # Muestra las consultas SQL generadas por Hibernate en la consola
+        SQL: DEBUG
         type:
           descriptor:
             sql:
-              BasicBinder: TRACE # Muestra también los valores que se "bindean" (asignan) a las consultas SQL
-
-    org.springframework.cloud.stream: DEBUG
-    org.apache.kafka: WARN
+              BasicBinder: TRACE
+    org.springframework.cloud.client.discovery: INFO
+    org.springframework.cloud.loadbalancer: INFO
 
 eureka:
   instance:
-    instance-id: "${spring.application.name}:${random.value}" # ID único para registrar esta instancia en Eureka (evita duplicados)
+    instance-id: "${spring.application.name}:${server.port}:${random.value}"
+    prefer-ip-address: true
+    ip-address: ${eureka.instance-ip}
+    hostname: ${eureka.instance-host}
+    non-secure-port: ${server.port}
+    secure-port-enabled: false
   client:
-    service-url:   
-      #defaultZone: http://192.168.100.48:8761/eureka/
-      #defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
-      #defaultZone: "${eureka.registry-server}"
-      defaultZone: http://192.168.1.120:8761/eureka/
+    service-url:
+      defaultZone: ${eureka.registry-server}
+    register-with-eureka: true
+    fetch-registry: true
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
