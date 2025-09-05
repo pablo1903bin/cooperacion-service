@@ -91,7 +91,9 @@ public class CooperacionController {
 	public ResponseEntity<ApiResponse<CooperacionCompleta>> getById(@PathVariable Long id) {
 
 	  var c = buscarCooperacionPorId.ejecutar(id);
-      webMapper.toCooperacionCompleta(c);
+      var t = webMapper.toCooperacionCompleta(c);
+	  var res = ApiResponse.builder().data(t).codigo(null).mensaje("Todo ok ").build();
+
       return null;
 	}
 
