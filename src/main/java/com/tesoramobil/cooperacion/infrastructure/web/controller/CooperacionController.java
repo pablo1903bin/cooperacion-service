@@ -4,17 +4,18 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.MediaType;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import com.tesoramobil.cooperacion.application.port.in.BuscarCooperacionPorId;
 import com.tesoramobil.cooperacion.application.port.in.CrearCooperacionUseCase;
 import com.tesoramobil.cooperacion.application.port.in.ListarCooperacionesDetalladasUseCase;
 import com.tesoramobil.cooperacion.application.port.in.ListarCooperacionesResumidas;
-import com.tesoramobil.cooperacion.dtos.CooperacionConAportacionesDTO;
 import com.tesoramobil.cooperacion.infrastructure.web.Responses;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.ApiResponse;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionCompleta;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionConAportacionesResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResumenResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CrearCooperacionRequest;
@@ -39,14 +40,15 @@ public class CooperacionController {
 	private final CrearCooperacionUseCase crearCooperacion;
 	private final ListarCooperacionesDetalladasUseCase listarCoopsDetalladas;
 	private final ListarCooperacionesResumidas listarCooperacionesResumidas;
+	private final BuscarCooperacionPorId buscarCooperacionPorId;
 	private final CooperacionWebMapper webMapper;
 
 	@GetMapping("/all")
 	@Operation(summary = "Listado de cooperaciones detalladas", description = "Obtiene cooperaciones con todos sus detalles (incluye aportaciones).")
 	@ApiResponses({
-			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CooperacionConAportacionesDTO.class)))),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CooperacionConAportacionesResponse.class)))),
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno") })
-	public ResponseEntity<ApiResponse<List<CooperacionConAportacionesDTO>>> getAllConAportaciones() {
+	public ResponseEntity<ApiResponse<List<CooperacionConAportacionesResponse>>> getAllConAportaciones() {
 		
 		var data = listarCoopsDetalladas.ejecutar();
 		
@@ -80,15 +82,17 @@ public class CooperacionController {
 	        description = "OK",
 	        content = @Content(
 	            mediaType = "application/json",
-	            schema = @Schema(implementation = CooperacionResumenResponse.class)
+	            schema = @Schema(implementation = CooperacionCompleta.class)
 	        )
 	    ),
 	    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No encontrada"),
 	    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno")
 	})
-	public ResponseEntity<ApiResponse<CooperacionResumenResponse>> getById(@PathVariable String id) {
-	    
-    return null;
+	public ResponseEntity<ApiResponse<CooperacionCompleta>> getById(@PathVariable Long id) {
+
+	  var c = buscarCooperacionPorId.ejecutar(id);
+      webMapper.toCooperacionCompleta(c);
+      return null;
 	}
 
 	

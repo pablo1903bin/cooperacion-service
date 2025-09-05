@@ -3,7 +3,7 @@ package com.tesoramobil.cooperacion.application.service;
 import com.tesoramobil.cooperacion.application.port.in.ListarCooperacionesDetalladasUseCase;
 import com.tesoramobil.cooperacion.application.port.out.AportacionQueryPort;
 import com.tesoramobil.cooperacion.application.port.out.CooperacionRepositoryPort;
-import com.tesoramobil.cooperacion.dtos.CooperacionConAportacionesDTO;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionConAportacionesResponse;
 import com.tesoramobil.cooperacion.mappers.CooperacionDetalleMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class ListarCooperacionesDetalladasService implements ListarCooperaciones
 	private final CooperacionDetalleMapper detalleMapper;
 
 	@Override
-	public List<CooperacionConAportacionesDTO> ejecutar() {
+	public List<CooperacionConAportacionesResponse> ejecutar() {
 		var cooperaciones = repo.findAll();
 
 		// Nota: esto hace 1 llamada por cooperación (posible N+1). Ver tips abajo.

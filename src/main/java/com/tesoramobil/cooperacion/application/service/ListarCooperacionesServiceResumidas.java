@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ListarCooperacionesService implements ListarCooperacionesResumidas {
+public class ListarCooperacionesServiceResumidas implements ListarCooperacionesResumidas {
 	
 	private final CooperacionRepositoryPort repo;
 

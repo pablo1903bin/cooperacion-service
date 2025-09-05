@@ -2,14 +2,16 @@ server:
   servlet:
     context-path: ${server.context-path}
   port: ${server.port}
+  forward-headers-strategy: framework
 
 spring:
   application:
     name: cooperacion-service
   profiles:
-    active: local
+    active: dev
   config:
-    import: optional:configserver:http://192.168.1.120:9999/
+    #import: optional:configserver:http://192.168.1.120:9999/
+    import: optional:configserver:http://192.168.100.48:7777/
 
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -71,4 +73,7 @@ eureka:
 
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    config-url: /gateway/cooperacion-service/v3/api-docs/swagger-config
+    url: /gateway/cooperacion-service/v3/api-docs
+    oauth2-redirect-url: https://supernovaworks.com.mx/gateway/cooperacion-service/swagger-ui/oauth2-redirect.html

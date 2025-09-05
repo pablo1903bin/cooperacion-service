@@ -26,7 +26,7 @@ public interface CooperacionMapper {
     @Mapping(source = "grupoId",        target = "groupId")
     @Mapping(source = "actualizadoEn",  target = "updateAt")
     @Mapping(source = "actualizadoPor", target = "updateBy")
-    @Mapping(target = "aportaciones", ignore = true) // este lo ignoramos por ahora
+    @Mapping(target = "aportaciones", ignore = true)
     CooperationEntity toEntity(Cooperacion domain);
 
     List<Cooperacion> toDomainList(List<CooperationEntity> entities);
