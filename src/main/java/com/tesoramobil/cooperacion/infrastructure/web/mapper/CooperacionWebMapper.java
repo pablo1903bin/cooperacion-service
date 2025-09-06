@@ -16,24 +16,28 @@ import com.tesoramobil.cooperacion.infrastructure.web.dto.CrearCooperacionReques
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface CooperacionWebMapper {
 
+	
     // request -> dominio
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "estado", constant = "ACTIVA") // <- antes estaba ignore
+    @Mapping(target = "estado", constant = "ACTIVA") 
     @Mapping(target = "fechaCreacion", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "actualizadoEn", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "actualizadoPor", source = "creadoPor")
     @Mapping(target = "montoActual", expression = "java(java.math.BigDecimal.ZERO)")
     @Mapping(target = "montoRestante", source = "montoObjetivo")
+    @Mapping(target = "aportaciones", ignore = true)
     Cooperacion toDomain(CrearCooperacionRequest req);
 
+    
     // dominio -> response (si los nombres coinciden, se mapea solo)
     CooperacionResponse toResponse(Cooperacion domain);
     
     
     CooperacionResumenResponse toResumen(Cooperacion domain);
     
-    @Mapping(target = "aportaciones", ignore = true)
+    
     CooperacionCompleta toCooperacionCompleta(Cooperacion domain);
+    
     
     List<CooperacionResumenResponse> toResumenList(List<Cooperacion> list);
     

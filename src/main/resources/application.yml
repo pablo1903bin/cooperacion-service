@@ -8,10 +8,10 @@ spring:
   application:
     name: cooperacion-service
   profiles:
-    active: dev
+    active: local
   config:
     #import: optional:configserver:http://192.168.1.120:9999/
-    import: optional:configserver:http://192.168.100.48:7777/
+    import: optional:configserver:http://localhost:7777/
 
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -74,6 +74,10 @@ eureka:
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
-    config-url: /gateway/cooperacion-service/v3/api-docs/swagger-config
-    url: /gateway/cooperacion-service/v3/api-docs
+    config-url: ${api-doc.config-url}
+    url: ${api-doc.url}
     oauth2-redirect-url: https://supernovaworks.com.mx/gateway/cooperacion-service/swagger-ui/oauth2-redirect.html
+
+api-doc:
+  server-base-path: ${api-doc.server-base-path}
+

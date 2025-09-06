@@ -2,6 +2,9 @@ package com.tesoramobil.cooperacion.infrastructure.web.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+
+import com.tesoramobil.cooperacion.domain.model.Aportacion;
 
 public record CrearCooperacionRequest(
 		
@@ -14,6 +17,9 @@ public record CrearCooperacionRequest(
 	    Long grupoId,
 	    BigDecimal montoObjetivo,
 	    BigDecimal montoPorParticipante,
-	    String noCuentaPago
+	    String noCuentaPago,
+	    List<Aportacion> aportaciones
+	    
+	    
 	    
 	) {}

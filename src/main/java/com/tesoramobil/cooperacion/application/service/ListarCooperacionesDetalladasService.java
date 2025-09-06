@@ -17,17 +17,23 @@ import java.util.List;
 public class ListarCooperacionesDetalladasService implements ListarCooperacionesDetalladasUseCase {
 
 	private final CooperacionRepositoryPort repo;
+	
 	private final AportacionQueryPort aportacionPort;
+	
 	private final CooperacionDetalleMapper detalleMapper;
 
 	@Override
 	public List<CooperacionConAportacionesResponse> ejecutar() {
+		
 		var cooperaciones = repo.findAll();
 
-		// Nota: esto hace 1 llamada por cooperación (posible N+1). Ver tips abajo.
-		return cooperaciones.stream().map(c -> {
+
+		return cooperaciones.stream().map( c -> {
+			
 			var dto = detalleMapper.toDetalle(c);
+			
 			var aportes = aportacionPort.obtenerPorCooperacion(c.getId());
+			
 			dto.setAportaciones(aportes); // composición en aplicación
 			return dto;
 		}).toList();

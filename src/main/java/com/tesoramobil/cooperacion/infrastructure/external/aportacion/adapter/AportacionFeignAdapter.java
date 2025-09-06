@@ -22,7 +22,7 @@ public class AportacionFeignAdapter implements AportacionQueryPort {
         var resp = client.obtenerPorCooperacion(cooperacionId);
         
         if (resp == null || !"OK".equalsIgnoreCase(resp.getCodigo())) {
-            // Lanza excepción de infraestructura o devuelve vacío según tu regla
+
             return List.of();
         }
         

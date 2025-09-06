@@ -3,6 +3,8 @@ package com.tesoramobil.cooperacion.domain.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +38,9 @@ public class Cooperacion {
     
     private LocalDateTime actualizadoEn;
     private Long actualizadoPor;
+    
+    private List<Aportacion> aportaciones;
+    
 
 
     // ===== Reglas de negocio =====
@@ -62,6 +67,14 @@ public class Cooperacion {
     // getters/setters
 
     // ===== Helpers =====
+    
+    public void cargarAportaciones(List<Aportacion> lista) {
+        this.aportaciones = java.util.List.copyOf(
+            Optional.ofNullable(lista).orElseGet(java.util.Collections::emptyList)
+        );
+    }
+
+    
     private static String requireNonEmpty(String s, String field) {
         if (s == null || s.isBlank()) throw new IllegalArgumentException(field + " vacío");
         return s;
@@ -70,16 +83,5 @@ public class Cooperacion {
         if (v == null || v.signum() < 0) throw new IllegalArgumentException(field + " negativo");
         return v;
     }
-
-	@Override
-	public String toString() {
-		return "Cooperacion [id=" + id + ", categoriaId=" + categoriaId + ", creadoPor=" + creadoPor + ", nombre="
-				+ nombre + ", descripcion=" + descripcion + ", estado=" + estado + ", fechaCreacion=" + fechaCreacion
-				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", grupoId=" + grupoId + ", montoActual="
-				+ montoActual + ", montoObjetivo=" + montoObjetivo + ", montoRestante=" + montoRestante
-				+ ", montoPorParticipante=" + montoPorParticipante + ", noCuentaPago=" + noCuentaPago
-				+ ", actualizadoEn=" + actualizadoEn + ", actualizadoPor=" + actualizadoPor + "]\n";
-	}
-    
     
 }
