@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.tesoramobil.cooperacion.application.port.in.BuscarCooperacionPorId;
 import com.tesoramobil.cooperacion.application.port.in.CrearCooperacionUseCase;
+import com.tesoramobil.cooperacion.application.port.in.ListarCoopearcionesIdUsuarioIdGrupo;
 import com.tesoramobil.cooperacion.application.port.in.ListarCooperacionesDetalladasUseCase;
 import com.tesoramobil.cooperacion.application.port.in.ListarCooperacionesResumidas;
 import com.tesoramobil.cooperacion.infrastructure.web.Responses;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.ApiResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionCompleta;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionCompletaResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionConAportacionesResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResumenResponse;
@@ -37,6 +39,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Cooperaciones", description = "Operaciones relacionadas con cooperaciones escolares o comunitarias")
 public class CooperacionController {
 
+	private final ListarCoopearcionesIdUsuarioIdGrupo listarCoopearcionesIdUsuarioIdGrupo;
 	private final CrearCooperacionUseCase crearCooperacion;
 	private final ListarCooperacionesDetalladasUseCase listarCoopsDetalladas;
 	private final ListarCooperacionesResumidas listarCooperacionesResumidas;
@@ -70,6 +73,30 @@ public class CooperacionController {
 		return Responses.ok(resumen, "Cooperaciones (resumen)");
 		
 	}
+	
+	@GetMapping("/byIdUser/{idUser}/byIdGroup/{idGrupo}")
+	@Operation(
+	    summary = "Obtener cooperaciones por ID de usuario y ID de Grupo",
+	    description = "Devuelve los datos resumidos de una cooperación según el identificador de usuario y grupo."
+	)
+	@ApiResponses({
+	    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+	        responseCode = "200",
+	        description = "OK",
+	        content = @Content(
+	            mediaType = "application/json",
+	            schema = @Schema(implementation = CooperacionCompleta.class)
+	        )
+	    ),
+	    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "No encontrada"),
+	    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno")
+	})
+	public ResponseEntity<ApiResponse<List<CooperacionCompletaResponse>>> getByIdUserByIdGroup(@PathVariable Long idUser, @PathVariable Long idGrupo) {
+
+	  return Responses.ok( webMapper.toCompleta(listarCoopearcionesIdUsuarioIdGrupo.ejecutar(idUser, idGrupo) ) , "Todo ok ");
+	  
+	}
+	
 	
 	@GetMapping("byId/{id}")
 	@Operation(

@@ -8,6 +8,7 @@ import org.mapstruct.ReportingPolicy;
 
 import com.tesoramobil.cooperacion.domain.model.Cooperacion;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionCompleta;
+import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionCompletaResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CooperacionResumenResponse;
 import com.tesoramobil.cooperacion.infrastructure.web.dto.CrearCooperacionRequest;
@@ -40,6 +41,9 @@ public interface CooperacionWebMapper {
     
     
     List<CooperacionResumenResponse> toResumenList(List<Cooperacion> list);
+    
+    
+    List<CooperacionCompletaResponse> toCompleta(List<Cooperacion> domain);
     
     
 }

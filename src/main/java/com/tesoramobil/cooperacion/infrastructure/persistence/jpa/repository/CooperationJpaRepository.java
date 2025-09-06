@@ -10,6 +10,11 @@ import java.util.List;
 @Repository
 public interface CooperationJpaRepository extends JpaRepository<CooperationEntity, Long> {
 
+	
+    // Lista simple (ordenada por updateAt desc)
+    List<CooperationEntity> findAllByCreatedByAndGroupIdOrderByUpdateAtDesc( Long createdBy, Long groupId );
+
+    
     // Buscar todas las cooperaciones de un grupo específico
     List<CooperationEntity> findByGroupId(Integer groupId);
 
@@ -21,4 +26,5 @@ public interface CooperationJpaRepository extends JpaRepository<CooperationEntit
 
     // Buscar cooperaciones por nombre (opcional, útil para búsquedas)
     List<CooperationEntity> findByNombreContainingIgnoreCase(String nombre);
+    
 }

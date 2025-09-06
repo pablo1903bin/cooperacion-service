@@ -13,4 +13,10 @@ public interface CooperacionDetalleMapper {
     // Ignoramos 'aportaciones' aquí; la setea el servicio
     @Mapping(target = "aportaciones", ignore = true)
     CooperacionConAportacionesResponse toDetalle(Cooperacion domain);
+    
+    
+    
+    CooperacionConAportacionesResponse toCompleteDetalles(Cooperacion domain);
+    
+    
 }

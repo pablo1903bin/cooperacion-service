@@ -17,9 +17,7 @@ public record CrearCooperacionRequest(
 	    Long grupoId,
 	    BigDecimal montoObjetivo,
 	    BigDecimal montoPorParticipante,
-	    String noCuentaPago,
-	    List<Aportacion> aportaciones
-	    
-	    
+	    String noCuentaPago
+
 	    
 	) {}

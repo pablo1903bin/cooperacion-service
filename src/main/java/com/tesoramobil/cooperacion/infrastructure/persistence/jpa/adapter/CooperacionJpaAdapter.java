@@ -65,5 +65,12 @@ public class CooperacionJpaAdapter implements CooperacionRepositoryPort {
 		return false;
 	}
 
+	@Override
+	public List<Cooperacion> findAllByUsuarioAndGrupo(Long userId, Long groupId) {
+		
+	    List<CooperationEntity> entities = jpa.findAllByCreatedByAndGroupIdOrderByUpdateAtDesc(userId, groupId);
+	    
+	    return mapper.toDomainList(entities);
+	}
 
 }

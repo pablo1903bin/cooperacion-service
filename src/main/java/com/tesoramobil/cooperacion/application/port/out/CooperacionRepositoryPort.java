@@ -17,5 +17,7 @@ public interface CooperacionRepositoryPort {
 
 	boolean existsByNombre(String nombre);
 	
+	List<Cooperacion> findAllByUsuarioAndGrupo(Long userId, Long groupId);
+	
 	
 }
