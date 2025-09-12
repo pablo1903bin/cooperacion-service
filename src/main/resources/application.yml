@@ -8,10 +8,10 @@ spring:
   application:
     name: cooperacion-service
   profiles:
-    active: local
+    active: dev
   config:
     #import: optional:configserver:http://192.168.1.120:9999/
-    import: optional:configserver:http://localhost:7777/
+    import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://192.168.100.48:7777/}
 
   datasource:
     driver-class-name: org.postgresql.Driver
